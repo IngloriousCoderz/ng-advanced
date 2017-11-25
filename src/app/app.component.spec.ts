@@ -9,6 +9,8 @@ import { LogService } from "./log.service";
 import { TodoService } from "./todo.service";
 import { Todo } from "./Todo";
 
+import { APP_NAME } from "./app.tokens";
+
 describe("AppComponent", () => {
   beforeEach(
     async(() => {
@@ -16,7 +18,7 @@ describe("AppComponent", () => {
         imports: [FormsModule],
         declarations: [AppComponent, FormComponent, TodosComponent],
         providers: [
-          { provide: "appName", useValue: "TODOZ" },
+          { provide: APP_NAME, useValue: "TODOZ" },
           { provide: "log", useClass: LogService },
           {
             provide: "todo",

@@ -10,11 +10,14 @@ import { LogService } from "./log.service";
 import { TodoService } from "./todo.service";
 import { Todo } from "./Todo";
 
+import { THIRD_PARTY_PROVIDERS } from "./third-party";
+import { APP_NAME } from "./app.tokens";
+
 @NgModule({
   declarations: [AppComponent, TodosComponent, FormComponent],
   imports: [BrowserModule, FormsModule],
   providers: [
-    { provide: "appName", useValue: "TODOZ" },
+    { provide: APP_NAME, useValue: "TODOZ" },
     { provide: "log", useClass: LogService },
     {
       provide: "todo",
@@ -27,7 +30,8 @@ import { Todo } from "./Todo";
         return new TodoService(todos, logService);
       },
       deps: ["log"]
-    }
+    },
+    THIRD_PARTY_PROVIDERS
   ],
   bootstrap: [AppComponent]
 })
