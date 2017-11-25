@@ -1,5 +1,2 @@
-<form (submit)="onSubmit()">
-  <input name="text" [(ngModel)]="text" placeholder="What next?" />
-  <button type="submit">Add</button>
-</form>
-<app-todos [todos]="todos"></app-todos>
+<app-form (addTodo)="addTodo($event)"></app-form>
+<app-todos [todos]="todos" (toggleDone)="toggleDone($event)"></app-todos>

@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 import { Todo } from "../Todo";
 
@@ -9,8 +9,9 @@ import { Todo } from "../Todo";
 })
 export class TodosComponent {
   @Input() todos: Todo[];
+  @Output() toggleDone: EventEmitter<Todo> = new EventEmitter();
 
-  toggleDone(todo) {
-    todo.done = !todo.done;
+  onClick(todo) {
+    this.toggleDone.emit(todo);
   }
 }

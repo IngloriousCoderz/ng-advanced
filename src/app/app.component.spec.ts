@@ -2,6 +2,7 @@ import { TestBed, async } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
+import { FormComponent } from "./form/form.component";
 import { TodosComponent } from "./todos/todos.component";
 
 describe("AppComponent", () => {
@@ -9,7 +10,7 @@ describe("AppComponent", () => {
     async(() => {
       TestBed.configureTestingModule({
         imports: [FormsModule],
-        declarations: [AppComponent, TodosComponent]
+        declarations: [AppComponent, FormComponent, TodosComponent]
       }).compileComponents();
     })
   );
@@ -20,15 +21,6 @@ describe("AppComponent", () => {
       const fixture = TestBed.createComponent(AppComponent);
       const app = fixture.debugElement.componentInstance;
       expect(app).toBeTruthy();
-    })
-  );
-
-  it(
-    `should have an empty text`,
-    async(() => {
-      const fixture = TestBed.createComponent(AppComponent);
-      const app = fixture.debugElement.componentInstance;
-      expect(app.text).toEqual("");
     })
   );
 
