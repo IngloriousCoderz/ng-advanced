@@ -5,12 +5,15 @@ import { AppComponent } from "./app.component";
 import { FormComponent } from "./form/form.component";
 import { TodosComponent } from "./todos/todos.component";
 
+import { TodoService } from "./todo.service";
+
 describe("AppComponent", () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
         imports: [FormsModule],
-        declarations: [AppComponent, FormComponent, TodosComponent]
+        declarations: [AppComponent, FormComponent, TodosComponent],
+        providers: [TodoService]
       }).compileComponents();
     })
   );
@@ -29,6 +32,8 @@ describe("AppComponent", () => {
     async(() => {
       const fixture = TestBed.createComponent(AppComponent);
       const app = fixture.debugElement.componentInstance;
+      app.ngOnInit();
+      fixture.autoDetectChanges();
       expect(app.todos.length).toBe(3);
     })
   );
