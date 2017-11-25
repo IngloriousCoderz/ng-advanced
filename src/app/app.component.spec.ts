@@ -2,13 +2,14 @@ import { TestBed, async } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
+import { TodosComponent } from "./todos/todos.component";
 
 describe("AppComponent", () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
         imports: [FormsModule],
-        declarations: [AppComponent]
+        declarations: [AppComponent, TodosComponent]
       }).compileComponents();
     })
   );

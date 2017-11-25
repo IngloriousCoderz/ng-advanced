@@ -2,6 +2,4 @@
   <input name="text" [(ngModel)]="text" placeholder="What next?" />
   <button type="submit">Add</button>
 </form>
-<ul>
-  <li *ngFor="let todo of todos" [class.done]="todo.done" (click)="toggleDone(todo)">{{todo.text}}</li>
-</ul>
+<app-todos [todos]="todos"></app-todos>
