@@ -10,6 +10,8 @@ import { AppComponent } from "./app.component";
 import { TodosComponent } from "./todos/todos.component";
 import { FormComponent } from "./form/form.component";
 
+import { ConfirmDirective } from "./directives/confirm";
+
 import rootReducer from "./reducers";
 import { initialState } from "./reducers/initialState";
 import { TodoEffects } from "./effects/todo";
@@ -22,7 +24,7 @@ import { THIRD_PARTY_PROVIDERS } from "./third-party";
 import { APP_NAME, API_URL } from "./app.tokens";
 
 @NgModule({
-  declarations: [AppComponent, TodosComponent, FormComponent],
+  declarations: [AppComponent, TodosComponent, FormComponent, ConfirmDirective],
   imports: [
     BrowserModule,
     FormsModule,

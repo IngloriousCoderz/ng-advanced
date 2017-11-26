@@ -16,9 +16,10 @@ import { Todo } from "../Todo";
 import {
   FETCH_TODOS_EFFECT,
   ADD_TODO_EFFECT,
-  TOGGLE_DONE_EFFECT
+  TOGGLE_DONE_EFFECT,
+  CLEAR_EFFECT
 } from "../reducers/actionTypes";
-import { setTodos, addTodo, toggleDone } from "../reducers/actions";
+import { setTodos, addTodo, toggleDone, clear } from "../reducers/actions";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -57,6 +58,11 @@ export class TodoEffects {
         )
         .map(() => toggleDone(todo.id));
     });
+
+  @Effect()
+  clear$: Observable<Action> = this.actions$
+    .ofType<FSA>(CLEAR_EFFECT)
+    .mergeMap(action => this.http.delete(this.apiUrl).map(() => clear()));
 
   constructor(
     @Inject(API_URL) private apiUrl,

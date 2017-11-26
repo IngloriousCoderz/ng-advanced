@@ -15,6 +15,7 @@ import { TodoService } from "./todo.service";
 import { Todo } from "./Todo";
 
 import { APP_NAME, API_URL } from "./app.tokens";
+import { ConfirmDirective } from "./directives/confirm";
 
 describe("AppComponent", () => {
   beforeEach(
@@ -25,7 +26,12 @@ describe("AppComponent", () => {
           HttpClientModule,
           StoreModule.forRoot({ root: rootReducer }, { initialState })
         ],
-        declarations: [AppComponent, FormComponent, TodosComponent],
+        declarations: [
+          AppComponent,
+          FormComponent,
+          TodosComponent,
+          ConfirmDirective
+        ],
         providers: [
           { provide: APP_NAME, useValue: "TODOZ" },
           { provide: API_URL, useValue: "http://localhost:3001/todos" },

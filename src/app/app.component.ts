@@ -5,7 +5,7 @@ import {
   ChangeDetectionStrategy
 } from "@angular/core";
 
-import { fetchTodos } from "./reducers/actions";
+import { fetchTodos, clearRemote } from "./reducers/actions";
 import { Todo } from "./Todo";
 
 @Component({
@@ -20,4 +20,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(fetchTodos());
   }
+
+  clear = () => {
+    this.store.dispatch(clearRemote());
+  };
 }
