@@ -1,17 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { StoreModule, Store } from "@ngrx/store";
 
-import { TodosComponent } from './todos.component';
+import rootReducer from "../reducers";
+import { initialState } from "../reducers/initialState";
 
-describe('TodosComponent', () => {
+import { TodosComponent } from "./todos.component";
+
+describe("TodosComponent", () => {
   let component: TodosComponent;
   let fixture: ComponentFixture<TodosComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ TodosComponent ]
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [StoreModule.forRoot({ root: rootReducer }, { initialState })],
+        declarations: [TodosComponent],
+        providers: [{ provide: "store", useClass: Store }]
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TodosComponent);
@@ -19,7 +26,17 @@ describe('TodosComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
+
+  it(
+    `should have a list of todos`,
+    async(() => {
+      const fixture = TestBed.createComponent(TodosComponent);
+      const app = fixture.debugElement.componentInstance;
+      app.ngOnInit();
+      app.todos.subscribe(todos => expect(todos.length).toBe(3));
+    })
+  );
 });

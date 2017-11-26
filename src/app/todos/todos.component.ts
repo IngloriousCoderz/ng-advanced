@@ -1,5 +1,7 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, Inject } from "@angular/core";
 
+import { getTodos } from "../reducers";
+import { toggleDone } from "../reducers/actions";
 import { Todo } from "../Todo";
 
 @Component({
@@ -8,10 +10,15 @@ import { Todo } from "../Todo";
   styleUrls: ["./todos.component.css"]
 })
 export class TodosComponent {
-  @Input() todos: Todo[];
-  @Output() toggleDone: EventEmitter<Todo> = new EventEmitter();
+  todos: Todo[];
+
+  constructor(@Inject("store") private store) {}
+
+  ngOnInit() {
+    this.todos = this.store.select(getTodos);
+  }
 
   onClick(todo) {
-    this.toggleDone.emit(todo);
+    this.store.dispatch(toggleDone(todo.id));
   }
 }

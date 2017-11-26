@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 
+import { getTodos } from "./reducers";
+import { toggleDone } from "./reducers/actions";
 import { Todo } from "./Todo";
 
 @Component({
@@ -10,20 +12,13 @@ import { Todo } from "./Todo";
 export class AppComponent implements OnInit {
   todos: Todo[] = [];
 
-  constructor(@Inject("todo") private todoService) {}
+  constructor(@Inject("store") private store) {}
 
   ngOnInit() {
-    // this.todos = this.todoService.getTodos();
-    this.todoService.getTodos().subscribe(todos => (this.todos = todos));
-  }
-
-  addTodo(text) {
-    // this.todoService.addTodo(text).subscribe(() => this.ngOnInit());
-    this.todoService.addTodo(text).subscribe(todo => this.todos.push(todo));
+    this.todos = this.store.select(getTodos);
   }
 
   toggleDone(todo) {
-    // this.todoService.toggleDone(todo).subscribe(() => this.ngOnInit());
-    this.todoService.toggleDone(todo).subscribe(() => (todo.done = !todo.done));
+    this.store.dispatch(toggleDone(todo));
   }
 }

@@ -11,7 +11,7 @@ export const setTodos = (todos: Todo[]) => ({
   payload: todos
 });
 
-export const addTodo = (text: string) => ({
+export const addTodo = (text?: string) => ({
   type: types.ADD_TODO,
   payload: text
 });

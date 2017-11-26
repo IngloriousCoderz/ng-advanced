@@ -89,11 +89,13 @@ describe("TodosApp", () => {
 
   it("should check the done property of todos", () => {
     const state = {
-      text: "some text",
-      todos: [
-        { id: 1, text: "Todo 1", done: true },
-        { id: 2, text: "Todo 2", done: false }
-      ]
+      root: {
+        text: "some text",
+        todos: [
+          { id: 1, text: "Todo 1", done: true },
+          { id: 2, text: "Todo 2", done: false }
+        ]
+      }
     };
 
     expect(isDone(state, 1)).toBe(true);
@@ -102,7 +104,8 @@ describe("TodosApp", () => {
     expect(areAllDone(state)).toBe(false);
     expect(areAllDone(state)).toBe(false);
 
-    const newState = rootReducer(state, actions.toggleDone(2));
+    const root = rootReducer(state.root, actions.toggleDone(2));
+    const newState = { root };
     expect(areAllDone(newState)).toBe(true);
     expect(areAllDone(newState)).toBe(true);
   });
