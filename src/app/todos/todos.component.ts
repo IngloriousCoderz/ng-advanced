@@ -9,9 +9,9 @@ import { Todo } from "../Todo";
 })
 export class TodosComponent {
   @Input() todos: Todo[];
-  @Output() toggleDone: EventEmitter<number> = new EventEmitter();
+  @Output() toggleDone: EventEmitter<Todo> = new EventEmitter();
 
   onClick(todo) {
-    this.toggleDone.emit(todo.id);
+    this.toggleDone.emit(todo);
   }
 }

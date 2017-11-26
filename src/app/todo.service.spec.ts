@@ -1,29 +1,21 @@
 import { TestBed, inject } from "@angular/core/testing";
+import { HttpClientModule } from "@angular/common/http";
 
 import { LogService } from "./log.service";
 import { TodoService } from "./todo.service";
 import { Todo } from "./Todo";
 
-import { APP_NAME } from "./app.tokens";
+import { APP_NAME, API_URL } from "./app.tokens";
 
 describe("TodoService", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientModule],
       providers: [
         { provide: APP_NAME, useValue: "TODOZ" },
+        { provide: API_URL, useValue: "http://localhost:3001/todos" },
         { provide: "log", useClass: LogService },
-        {
-          provide: "todo",
-          useFactory: logService => {
-            const todos: Todo[] = [
-              { id: 1, text: "Todo 1", done: true },
-              { id: 2, text: "Todo 2", done: false },
-              { id: 3, text: "Todo 3" }
-            ];
-            return new TodoService(todos, logService);
-          },
-          deps: ["log"]
-        }
+        { provide: "todo", useClass: TodoService }
       ]
     });
   });

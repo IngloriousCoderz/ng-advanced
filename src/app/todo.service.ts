@@ -1,28 +1,43 @@
+import { Injectable, Inject } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
-import { of } from "rxjs/observable/of";
+import "rxjs/add/operator/do";
 
+import { API_URL } from "./app.tokens";
 import { Todo } from "./Todo";
 
+const httpOptions = {
+  headers: new HttpHeaders({ "Content-Type": "application/json" })
+};
+
+@Injectable()
 export class TodoService {
-  constructor(private todos: Todo[], private logService) {}
+  constructor(
+    @Inject(API_URL) private apiUrl,
+    @Inject("log") private logService,
+    private http: HttpClient
+  ) {}
 
   getTodos(): Observable<Todo[]> {
     this.logService.log("Fetching todos...");
-    return of(this.todos);
+    return this.http.get<Todo[]>(this.apiUrl);
   }
 
   addTodo(text): Observable<Todo> {
-    const id = this.todos.length ? this.todos[this.todos.length - 1].id : 0;
-    const todo = { id: id + 1, text };
-    this.todos.push(todo);
-    this.logService.log(`Todo ${todo.id} added.`);
-    return of(todo);
+    return this.http.post<Todo>(this.apiUrl, { text }, httpOptions).do(todo => {
+      this.logService.log(`Todo ${todo.id} added.`);
+    });
   }
 
-  toggleDone(id): Observable<any> {
-    const index = this.todos.findIndex(todo => todo.id === id);
-    this.todos[index].done = !this.todos[index].done;
-    this.logService.log(`Todo ${id} toggled.`);
-    return new Observable();
+  toggleDone(todo): Observable<any> {
+    return this.http
+      .patch<Todo>(
+        `${this.apiUrl}/${todo.id}`,
+        { done: !todo.done },
+        httpOptions
+      )
+      .do(() => {
+        this.logService.log(`Todo ${todo.id} toggled.`);
+      });
   }
 }

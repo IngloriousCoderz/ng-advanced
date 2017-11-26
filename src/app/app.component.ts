@@ -13,15 +13,17 @@ export class AppComponent implements OnInit {
   constructor(@Inject("todo") private todoService) {}
 
   ngOnInit() {
-    // this.todoService.getTodos().subscribe(todos => (this.todos = todos));
-    this.todos = this.todoService.getTodos();
+    // this.todos = this.todoService.getTodos();
+    this.todoService.getTodos().subscribe(todos => (this.todos = todos));
   }
 
   addTodo(text) {
-    this.todoService.addTodo(text);
+    // this.todoService.addTodo(text).subscribe(() => this.ngOnInit());
+    this.todoService.addTodo(text).subscribe(todo => this.todos.push(todo));
   }
 
-  toggleDone(id) {
-    this.todoService.toggleDone(id);
+  toggleDone(todo) {
+    // this.todoService.toggleDone(todo).subscribe(() => this.ngOnInit());
+    this.todoService.toggleDone(todo).subscribe(() => (todo.done = !todo.done));
   }
 }
