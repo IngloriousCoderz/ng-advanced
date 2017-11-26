@@ -1,4 +1,11 @@
-import { Component, Output, EventEmitter, Inject, OnInit } from "@angular/core";
+import {
+  Component,
+  Output,
+  EventEmitter,
+  Inject,
+  OnInit,
+  ChangeDetectionStrategy
+} from "@angular/core";
 
 import { Observable } from "rxjs/Observable";
 import { of } from "rxjs/observable/of";
@@ -13,7 +20,8 @@ import { setText, addTodoRemote } from "../reducers/actions";
 @Component({
   selector: "app-form",
   templateUrl: "./form.component.html",
-  styleUrls: ["./form.component.css"]
+  styleUrls: ["./form.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormComponent implements OnInit {
   text: Observable<string> = of("");
