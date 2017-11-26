@@ -28,7 +28,18 @@ export const toggleDone = (id: number) => ({
 
 export const clear = () => ({ type: types.CLEAR });
 
-// export const fetchTodos = () => ({ type: types.FETCH_TODOS_SAGA });
-// export const addTodo = text => ({ type: types.ADD_TODO_SAGA, payload: text });
-// export const removeTodo = id => ({ type: types.REMOVE_TODO_SAGA, payload: id });
-// export const toggleDone = id => ({ type: types.TOGGLE_DONE_SAGA, payload: id });
+export const fetchTodos = () => ({ type: types.FETCH_TODOS_EFFECT });
+
+export const addTodoRemote = () => ({
+  type: types.ADD_TODO_EFFECT
+});
+
+export const removeTodoRemote = (id: number) => ({
+  type: types.REMOVE_TODO_EFFECT,
+  payload: id
+});
+
+export const toggleDoneRemote = (todo: Todo) => ({
+  type: types.TOGGLE_DONE_EFFECT,
+  payload: todo
+});

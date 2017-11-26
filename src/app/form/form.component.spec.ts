@@ -39,7 +39,7 @@ describe("FormComponent", () => {
     async(() => {
       const fixture = TestBed.createComponent(FormComponent);
       const form = fixture.debugElement.componentInstance;
-      expect(form.text).toEqual("");
+      form.text.subscribe(text => expect(text).toBe(""));
     })
   );
 });

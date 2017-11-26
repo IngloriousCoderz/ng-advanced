@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, Inject } from "@angular/core";
 
 import { getTodos } from "../reducers";
-import { toggleDone } from "../reducers/actions";
+import { toggleDoneRemote } from "../reducers/actions";
 import { Todo } from "../Todo";
 
 @Component({
@@ -19,6 +19,6 @@ export class TodosComponent {
   }
 
   onClick(todo) {
-    this.store.dispatch(toggleDone(todo.id));
+    this.store.dispatch(toggleDoneRemote(todo));
   }
 }
