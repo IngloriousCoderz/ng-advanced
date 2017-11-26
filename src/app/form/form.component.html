@@ -1,4 +1,10 @@
+<ng-content select="[header]"></ng-content>
+
+<ng-content select=".subtitle"></ng-content>
+
 <form (submit)="submit$.next()">
   <input [value]="text | async" (input)="input$.next($event)" placeholder="What next?" autofocus autocomplete="no" />
   <button type="submit">Add</button>
 </form>
+
+<ng-content select="hr"></ng-content>
