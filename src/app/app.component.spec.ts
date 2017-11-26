@@ -52,8 +52,8 @@ describe("AppComponent", () => {
       const fixture = TestBed.createComponent(AppComponent);
       const app = fixture.debugElement.componentInstance;
       app.ngOnInit();
-      fixture.autoDetectChanges();
-      expect(app.todos.length).toBe(3);
+      // expect(app.todos.length).toBe(3);
+      app.todos.subscribe(todos => expect(todos.length).toBe(3));
     })
   );
 

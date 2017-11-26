@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   constructor(@Inject("todo") private todoService) {}
 
   ngOnInit() {
+    // this.todoService.getTodos().subscribe(todos => (this.todos = todos));
     this.todos = this.todoService.getTodos();
   }
 
@@ -20,7 +21,7 @@ export class AppComponent implements OnInit {
     this.todoService.addTodo(text);
   }
 
-  toggleDone(todo) {
-    this.todoService.toggleDone(todo.id);
+  toggleDone(id) {
+    this.todoService.toggleDone(id);
   }
 }

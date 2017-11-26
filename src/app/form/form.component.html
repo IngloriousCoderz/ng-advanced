@@ -1,4 +1,4 @@
-<form (submit)="onSubmit(text)">
-  <input name="text" [(ngModel)]="text" placeholder="What next?" />
+<form (submit)="submit$.next()">
+  <input [value]="text" (input)="input$.next($event)" placeholder="What next?" autofocus autocomplete="no" />
   <button type="submit">Add</button>
 </form>
